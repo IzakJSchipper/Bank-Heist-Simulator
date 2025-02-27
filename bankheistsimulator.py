@@ -28,7 +28,8 @@ def type_text(text, delay=0.03):
     print()
 
 security_level = random.randint(1, 10)
-
+door_strength = random.randint(1, 10)
+police_speed = random.randint(1, 10)
 
 
 a = 0
@@ -38,12 +39,35 @@ c = 0
 def hacker_skill():
     global crew, security_level
     
-    act = int(input(f"0 for Smart Guy, 1 for Strong Guy, 2 for Fast Guy: "))
+    type_text("\033[41m0 for Smart Guy, 1 for Strong Guy, 2 for Fast Guy\033[0m", delay=0.07)
+    act = int(input(f"Chose wisely: "))
 
     if crew[act]["hacklvl"] > security_level:
-        print(f"since the security was {security_level}0 percent secure, {crew[act]["Name"]}'s hacker level of {crew[act]["hacklvl"]}0 percent was able to easily break through!")   
+        type_text(f"\033[42mSince the security was {security_level}0 percent secure, {crew[act]["Name"]}'s hacker level of {crew[act]["hacklvl"]}0 percent was able to easily break through!\033[0m", delay=0.03)   
     else:
         print("You got caught... implement more logic here later.")
+
+def breaking_skill():
+    global crew, door_strength
+    
+    type_text("\033[41m0 for Smart Guy, 1 for Strong Guy, 2 for Fast Guy\033[0m", delay=0.07)
+    act = int(input(f"Chose wisely: "))
+
+    if crew[act]["stronglvl"] > door_strength:
+        type_text(f"\033[42mSince the door was {door_strength}0 percent reinforced, {crew[act]["Name"]}'s strength level of {crew[act]["stronglvl"]}0 percent was able to easily break through!\033[0m", delay=0.03)   
+    else:
+        print("You got caught... implement more logic here later.")        
+
+def outrun_skill():
+    global crew, police_speed
+    
+    type_text("\033[41m0 for Smart Guy, 1 for Strong Guy, 2 for Fast Guy\033[0m", delay=0.07)
+    act = int(input(f"Chose wisely: "))
+
+    if crew[act]["speed"] > police_speed:
+        type_text(f"\033[42mSince the police were {police_speed}0 percent ready, {crew[act]["Name"]}'s speed level of {crew[act]["speed"]}0 percent allowed for him to run away and lead the crew to safety!\033[0m", delay=0.03)   
+    else:
+        print("You got caught... implement more logic here later.")     
 
 def moneycheck1():
     global a, b, c
@@ -98,21 +122,21 @@ crew = [
         "hacklvl" : 9,
         "stronglvl" : 2,
         "speed" : 2,
-        "split" : a % cash,
+        "split" : (a / 100) * cash,
     },
     {
         "Name" : "StrongGuy",
         "hacklvl" : 1,
         "stronglvl" : 8,
         "speed" : 5,
-        "split" : b % cash,
+        "split" : (b / 100) * cash,
     },
     {
         "Name" : "FastGuy",
         "hacklvl" : 4,
         "stronglvl" : 5,
-        "speedlvl" : 9,
-        "split" : c % cash,
+        "speed" : 9,
+        "split" : (c / 100) * cash,
     },
 ]
 
@@ -173,3 +197,33 @@ type_text("the thre drive to the bank. It's outside of hours.", delay=0.03)
 type_text("You must break into the bank, by hacking the security system.", delay=0.05)
 type_text("Chose someone to do it", delay=0.05)
 hacker_skill()
+nextpg()
+clear_screen()
+type_text("\033[44mChapter two, Breaking down the door.\033[0m", delay=0.07)
+type_text("The three walk into the bank...", delay=0.03)
+type_text("But... there is a physically locked door. Literally no way to sneekily break in or hack through something...", delay=0.05)
+type_text("Chose someone to do it", delay=0.05)
+breaking_skill()
+nextpg()
+clear_screen()
+type_text("\033[44mChapter three, Running away!\033[0m", delay=0.07)
+type_text("Boom! Jackpot!", delay=0.03)
+cash = random.randint(100, 1000000000000)
+type_text(f"\033[42mthey found {cash} USD!\033[0m", delay=0.03)
+wait()
+type_text("But... the sirens go off...", delay=0.05)
+type_text("They notice that the police are already at the building.", delay=0.03)
+type_text("Now they need to escape, someone has to find an escape plan.", delay=0.03)
+outrun_skill()
+nextpg()
+clear_screen()
+
+crew[0]["split"] = round((a / 100) * cash)
+crew[1]["split"] = round((b / 100) * cash)
+crew[2]["split"] = round((c / 100) * cash)
+
+
+type_text("\033[42mChapter four, Reap the rewards!\033[0m", delay=0.07)
+type_text("Congrats to the team!", delay=0.03)
+type_text("Thanks to the teamwork, nobody had been caught!", delay=0.03)
+type_text(f"Smart Guy made \033[42m{crew[0]["split"]}\033[0m, Strong Guy Made \033[42m{crew[1]["split"]}\033[0m, and Fast Guy made \033[42m{crew[2]["split"]}\033[0m.", delay=0.03)
